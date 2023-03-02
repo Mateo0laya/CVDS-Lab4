@@ -156,6 +156,8 @@ PowerBonusScore:
 	git add .			
 	git commit -m "especificación métodos"
 	```
+![image](https://user-images.githubusercontent.com/89365336/222557408-d704ba03-6b39-4965-b993-87a240cd1500.png)
+
 
 5. Actualice el archivo `pom.xml` e incluya las dependencias para la ultima versión de JUnit y la versión del compilador de Java a la versión 8 .
    
