@@ -11,6 +11,7 @@ public class OriginalScore implements GameScore{
 	 * @pos finalScore >= 0
 	 * @return int finalScore total of points after discount wrong letters
 	 */
+	
 	@Override
 	public int calculateScore(int correctCount, int incorrectCount) {
 		// TODO Auto-generated method stub
