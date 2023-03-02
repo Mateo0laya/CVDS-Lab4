@@ -43,14 +43,112 @@ principio de inversión de dependencias:
 ### Parte I
 
 1. Clone el proyecto (no lo descargue!).
+![image](https://user-images.githubusercontent.com/89365336/222550462-81eae12d-05fd-4b8e-94ea-dd3644fa0d5c.png)
+
    
 2. A partir del código existente, implemente sólo los cascarones del
    modelo antes indicado.
+Clases en el hangman.model:
+![image](https://user-images.githubusercontent.com/89365336/222552397-dddcaae1-0e12-40fb-ae5d-b38d03b60b1c.png)
+
+Interface GameScore:
+```
+package hangman.model;
+
+public interface GameScore {
+	public int calculateScore(int correctCount, int incorrectCount);
+}
+```
+
+OriginalScore:
+```
+package hangman.model;
+
+public class OriginalScore implements GameScore{
+
+	@Override
+	public int calculateScore(int correctCount, int incorrectCount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
+```
+
+BonusScore:
+```
+package hangman.model;
+
+public class BonusScore implements GameScore{
+
+	@Override
+	public int calculateScore(int correctCount, int incorrectCount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
+```
+
+PowerBonusScore:
+```
+package hangman.model;
+
+public class PowerBonusScore implements GameScore{
+
+	@Override
+	public int calculateScore(int correctCount, int incorrectCount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
+```
 
 3. Haga la especificación de los métodos calculateScore (de las tres
    variantes de GameScore), a partir de las especificaciones
    generales dadas anteriormente. Recuerde tener en cuenta: @pre,
    @pos, @param, @throws.
+   
+OriginalScore:
+```
+	/**
+	 * This method calculates the final score according with the rules of OrginalScore
+	 * The correct letters don´t add points, wrong letters remain 5 points
+	 * @param correctCount total of right letters
+	 * @param incorrectCount total of wrong letters
+	 * @pre initialScore = 100
+	 * @pos finalScore >= 0
+	 * @return int finalScore total of points after discount wrong letters
+	 */
+```
+
+BonusScore:
+```
+	/**
+	 * This method calculates the final score according with the rules of BonusScore
+	 * The correct letters add 10 points, wrong letters remain 5 points
+	 * @param correctCount total of right letters
+	 * @param incorrectCount total of wrong letters
+	 * @pre initialScore = 0
+	 * @pos finalScore >= 0
+	 * @return total of points after discount wrong letters
+	 */
+```
+
+PowerBonusScore:
+```
+	/**
+	 * This method calculates the final score according with the rules of PowerBonusScore
+	 * The correct i letter add 5^i points, wrong letters remain 8 points
+	 * @param correctCount total of right letters
+	 * @param incorrectCount total of wrong letters
+	 * @pre initialScore = 0
+	 * @pos finalScore >= 0
+	 * @pos finalScore <= 500
+	 * @return total of points after discount wrong letters
+	 */
+```
 
 4. Haga commit de lo realizado hasta ahora. Desde la terminal:
 
