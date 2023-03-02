@@ -160,7 +160,9 @@ PowerBonusScore:
 
 
 5. Actualice el archivo `pom.xml` e incluya las dependencias para la ultima versión de JUnit y la versión del compilador de Java a la versión 8 .
-   
+Revisar pom.xml
+![image](https://user-images.githubusercontent.com/89365336/222559211-fb8a121b-9292-4107-b3ee-7c3b7f6b4ce7.png)
+
 
 6. Teniendo en cuenta dichas especificaciones, en la clase donde se
    implementarán las pruebas (GameScoreTest), en los
