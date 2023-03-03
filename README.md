@@ -169,9 +169,268 @@ Revisar pom.xml
    comentarios iniciales, especifique las clases de equivalencia para
    las tres variantes de GameScore, e identifique
    condiciones de frontera. 
+   
+```
+	/**
+	 * 1- Equivalence Class: negative parameters, border condition(-1)
+	 * 2- Equivalence Class: normal parameters (0-27), border condition(1)
+	 * 3- Equivalence Class: large parameters (>27), border condition(1000)
+	 */  
+
+```
 
 7. Para cada clase de equivalencia y condición de frontera, implemente
    una prueba utilizando JUnit.
+   
+OriginalScoreTest:
+```
+ private GameScore score = new OriginalScore();
+	
+	@Test
+	public void ShouldThrowsExceptionWhenAnyParameterIsNegative() {
+		//arrange
+		String expectedResult = new ModelException("NEGATIVE_COUNTER").getMessage();
+		int correctCount = 0;
+		int incorrectCount = -1;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+		} catch (ModelException e) {
+			//assert
+			assertEquals(expectedResult, e.getMessage());
+		}
+
+	}
+
+	@Test
+	public void ShouldReturnPositiveResultWhenParametersAreValid() {
+		//arrange
+		int expectedResult = 90;
+		int correctCount = 0;
+		int incorrectCount = 1;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+
+			//assert
+			assertEquals(expectedResult, result);
+		} catch (ModelException e) {
+			assertEquals(true, false);
+		}
+	}
+
+	@Test
+	public void ShouldReturnZeroWhenParametersAreLonger() {
+		//arrange
+		int expectedResult = 0;
+		int correctCount = 0;
+		int incorrectCount = 1000;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+
+			//assert
+			assertEquals(expectedResult, result);
+		} catch (ModelException e) {
+			assertEquals(true, false);
+		}
+	}
+```
+
+BonusScoreTest:
+```
+private GameScore score = new BonusScore();
+	
+	@Test
+	public void ShouldThrowsExceptionWhenAnyParameterIsNegative() {
+		//arrange
+		String expectedResult = new ModelException("NEGATIVE_COUNTER").getMessage();
+		int correctCount = 0;
+		int incorrectCount = -1;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+		} catch (ModelException e) {
+			//assert
+			assertEquals(expectedResult, e.getMessage());
+		}
+
+	}
+
+	@Test
+	public void ShouldReturnFiveWhenBothParametersAreOne(){
+		//arrange
+		int expectedResult = 5;
+		int correctCount = 1;
+		int incorrectCount = 1;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+
+			//assert
+			assertEquals(expectedResult, result);
+		} catch (ModelException e) {
+			assertEquals(true, false);
+		}
+
+	}
+
+	@Test
+	public void ShouldReturnTenThousandWhenCorrectIs1000AndIncorrectIs0(){
+		//arrange
+		int expectedResult = 10000;
+		int correctCount = 1000;
+		int incorrectCount = 0;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+
+			//assert
+			assertEquals(expectedResult, result);
+		} catch (ModelException e) {
+			assertEquals(true, false);
+		}
+		
+	}
+
+	@Test
+	public void ShouldReturnZeroWhenCorrectIs0AndIncorrectIs1000(){
+		//arrange
+		int expectedResult = 0;
+		int correctCount = 0;
+		int incorrectCount = 1000;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+
+			//assert
+			assertEquals(expectedResult, result);
+		} catch (ModelException e) {
+			assertEquals(true, false);
+		}
+		
+	}
+
+	@Test
+	public void ShouldReturnFiveThousandWhenCorrectIs1000AndIncorrectIs1000(){
+		//arrange
+		int expectedResult = 5000;
+		int correctCount = 1000;
+		int incorrectCount = 1000;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+
+			//assert
+			assertEquals(expectedResult, result);
+		} catch (ModelException e) {
+			assertEquals(true, false);
+		}
+		
+	}
+```
+
+PowerBonusTest:
+```
+private GameScore score = new PowerBonusScore();
+
+	@Test
+	public void ShouldThrowsExceptionWhenAnyParameterIsNegative() {
+		//arrange
+		String expectedResult = new ModelException("NEGATIVE_COUNTER").getMessage();
+		int correctCount = 0;
+		int incorrectCount = -1;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+		} catch (ModelException e) {
+			//assert
+			assertEquals(expectedResult, e.getMessage());
+		}
+
+	}
+
+	@Test
+	public void ShouldReturnZeroWhenBothParametersAreOne() {
+		//arrange
+		int expectedResult = 0;
+		int correctCount = 1;
+		int incorrectCount = 1;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+
+			//assert
+			assertEquals(expectedResult, result);
+		} catch (ModelException e) {
+			assertEquals(true, false);
+		}
+	}
+
+	@Test
+	public void ShouldReturnFiveHundredWhenCorrectIs1000AndIncorrectIs0() {
+		//arrange
+		int expectedResult = 500;
+		int correctCount = 1000;
+		int incorrectCount = 0;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+
+			//assert
+			assertEquals(expectedResult, result);
+		} catch (ModelException e) {
+			assertEquals(true, false);
+		}
+	}
+
+	@Test
+	public void ShouldReturnZeroWhenCorrectIs0AndIncorrectIs1000() {
+		//arrange
+		int expectedResult = 0;
+		int correctCount = 0;
+		int incorrectCount = 1000;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+
+			//assert
+			assertEquals(expectedResult, result);
+		} catch (ModelException e) {
+			assertEquals(true, false);
+		}
+	}
+
+	@Test
+	public void ShouldReturnFiveHundredWhenCorrectIs1000AndIncorrectIs1000() {
+		//arrange
+		int expectedResult = 500;
+		int correctCount = 1000;
+		int incorrectCount = 1000;
+
+		//action
+		try {
+			int result = score.calculateScore(correctCount, incorrectCount);
+
+			//assert
+			assertEquals(expectedResult, result);
+		} catch (ModelException e) {
+			assertEquals(true, false);
+		}
+	}
+```
 
 8. Haga commit de lo realizado hasta ahora. Desde la terminal:
 
@@ -179,9 +438,79 @@ Revisar pom.xml
 	git add .			
 	git commit -m "implementación pruebas"
 	```
+![image](https://user-images.githubusercontent.com/89365336/222591387-e2e70086-3a0f-475d-ae0b-527206a697de.png)
+
+
 9. Realice la implementación de los 'cascarones' realizados anteriormente.
    Asegúrese que todas las pruebas unitarias creadas en los puntos anteriores
    se ejecutan satisfactoriamente.
+
+OriginalScore.calculateScore():
+```
+	@Override
+	public int calculateScore(int correctCount, int incorrectCount) throws ModelException{
+
+		if(correctCount < 0 || incorrectCount <0){
+			throw new ModelException("NEGATIVE_COUNTER");
+		}
+
+		int score = 100;
+		int badScore = incorrectCount*10;
+		int finalScore = score - badScore;
+		finalScore = finalScore > 0 ? finalScore : 0;
+		return finalScore;
+
+	}
+```
+
+BonusScore.calculateScore():
+```
+	@Override
+	public int calculateScore(int correctCount, int incorrectCount) throws ModelException{
+
+		if(correctCount < 0 || incorrectCount <0){
+			throw new ModelException("NEGATIVE_COUNTER");
+		}
+
+		int score = 0;
+		int goodScore = correctCount*10;
+		int badScore = incorrectCount*5;
+		int finalScore = score + goodScore - badScore;
+		finalScore = finalScore > 0 ? finalScore : 0;
+		return finalScore;
+		
+	}
+```
+
+PowerBonusScore.calculateScore():
+```
+	@Override
+	public int calculateScore(int correctCount, int incorrectCount) throws ModelException{
+		if(correctCount < 0 || incorrectCount <0){
+			throw new ModelException("NEGATIVE_COUNTER");
+		}
+
+		int score = 0;
+		int goodScore = calculateBonus(correctCount);
+		int badScore = incorrectCount*8;
+		int finalScore = score + goodScore - badScore;
+		finalScore = finalScore < 500 ? finalScore : 500;
+		finalScore = finalScore > 0 ? finalScore : 0;
+		return finalScore;
+		
+	}
+
+	private int calculateBonus(int correctCount) {
+		int bonus = 0;
+		for(int i = 1; i <= correctCount; i++) {
+			bonus += 5^i;
+		}
+		return bonus;
+	}
+```
+
+![image](https://user-images.githubusercontent.com/89365336/222594423-88b9ac09-e3e0-4db2-9719-e3e7a510ae8d.png)
+
 
 10. Al finalizar haga un nuevo commit:
 
@@ -189,6 +518,8 @@ Revisar pom.xml
 	git add .			
 	git commit -m "implementación del modelo"
 	```
+![image](https://user-images.githubusercontent.com/89365336/222594775-c036b57f-94fe-47e6-8cbc-24f9b619bd75.png)
+
 
 11. Para sincronizar el avance en el respositorio y NO PERDER el trabajo, use
     el comando de GIT para enviar los cambios:
