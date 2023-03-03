@@ -528,6 +528,8 @@ PowerBonusScore.calculateScore():
 	git push <URL Repositorio>	
 ```
 
+![image](https://user-images.githubusercontent.com/89365336/222596309-35650fdc-6b89-4178-9f06-27f89b4a54fc.png)
+
 
 ### Parte II
 
