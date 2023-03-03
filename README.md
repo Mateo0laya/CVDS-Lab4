@@ -1,3 +1,7 @@
+# Laboratorio 4
+## Integrantes
++ Mateo Olaya Garzón
++ Andrés Camilo Oñate Quimbayo
 ### Escuela Colombiana de Ingeniería
 
 ### Procesos de Desarrollo de Software
@@ -528,6 +532,8 @@ PowerBonusScore.calculateScore():
 	git push <URL Repositorio>	
 ```
 
+![image](https://user-images.githubusercontent.com/89365336/222596309-35650fdc-6b89-4178-9f06-27f89b4a54fc.png)
+
 
 ### Parte II
 
@@ -540,16 +546,39 @@ En este taller se va a utilizar un contenedor liviano ([GoogleGuice](https://git
 
 1. Utilizando el HangmanFactoryMethod (MétodoFabrica) incluya el
    OriginalScore a la configuración.
+   
+Lo incluimos en la clase abstracta \
+![image](https://user-images.githubusercontent.com/89365336/222604792-c3c05728-866d-44cb-a205-6b4ab5ca3d35.png)
+
+Lo incluimos en la clase concreta Default que sale de la clase abstracta \
+![image](https://user-images.githubusercontent.com/89365336/222604815-cc82b308-a93e-4401-8091-1b486bb923f5.png)
+
 
 Incorpore el Contenedor Liviano Guice dentro del proyecto:
 
 * Revise las dependencias necesarias en el pom.xml.
+Unicamente actualizamos la versión de la dependencia
+```
+	<dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+```
+
 * Modifique la inyección de dependencias utilizando guice en lugar del
   método fábrica..
 * Configure la aplicación de manera que desde el programa SwingProject
   NO SE CONSTRUYA el Score directamente, sino a través de Guice, asi
   mismo como las otras dependencias que se están inyectando mediante
   la fabrica.
+  En la clase SwingProject modificamos el constructor:
+ ```
+  public static void main(String[] args) {
+        createGUIUsingGuice().play();
+    }
+ ```
+  
 * Mediante la configuración de la Inyección de
   Dependencias se pueda cambiar el comportamiento del mismo, por
   ejemplo:
@@ -558,5 +587,44 @@ Incorpore el Contenedor Liviano Guice dentro del proyecto:
 	* Utilizar el idioma francés.
     * Utilizar el diccionario francés.
 	* etc...
+En la clase HangmanFactoryServices realizamos la configuracion del Guice:
+![image](https://user-images.githubusercontent.com/89365336/222609807-914e3aca-c6e7-4587-aa06-1efaa7ca6e4c.png)
+
+```
+import hangman.model.Language;
+import hangman.model.English;
+import hangman.model.French;
+import hangman.model.Spanish;
+
+import hangman.model.dictionary.HangmanDictionary;
+import hangman.model.dictionary.SpanishDictionaryDataSource;
+import hangman.model.dictionary.EnglishDictionaryDataSource;
+import hangman.model.dictionary.FrenchDictionaryDataSource;
+
+import hangman.view.HangmanPanel;
+import hangman.view.HangmanColoridoPanel;
+import hangman.view.HangmanNoviolentoPanel;
+import hangman.view.HangmanStickmanPanel;
+
+import hangman.model.GameScore;
+import hangman.model.BonusScore;
+import hangman.model.OriginalScore;
+import hangman.model.PowerBonusScore;
+
+public class HangmanFactoryServices extends com.google.inject.AbstractModule {
+
+    @Override
+    protected void configure() {
+        /* Guice dependency injection */
+        bind(Language.class).to(Spanish.class);
+        bind(HangmanDictionary.class).to(SpanishDictionaryDataSource.class);
+        bind(HangmanPanel.class).to(HangmanNoviolentoPanel.class);
+        bind(GameScore.class).to(BonusScore.class);
+        // bind(Interface.class).to(Concrete.class);
+    }
+```
+
+
+
 * Para lo anterior, [puede basarse en el ejemplo dado como
   referencia](https://github.com/PDSW-ECI/LightweighContainers_DepenendecyInjectionIntro-WordProcessor).
