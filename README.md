@@ -549,6 +549,7 @@ En este taller se va a utilizar un contenedor liviano ([GoogleGuice](https://git
    
 Lo incluimos en la clase abstracta \
 ![image](https://user-images.githubusercontent.com/89365336/222604792-c3c05728-866d-44cb-a205-6b4ab5ca3d35.png)
+
 Lo incluimos en la clase concreta Default que sale de la clase abstracta \
 ![image](https://user-images.githubusercontent.com/89365336/222604815-cc82b308-a93e-4401-8091-1b486bb923f5.png)
 
