@@ -12,9 +12,19 @@ public class BonusScore implements GameScore{
 	 * @return total of points after discount wrong letters
 	 */
 	@Override
-	public int calculateScore(int correctCount, int incorrectCount) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int calculateScore(int correctCount, int incorrectCount) throws ModelException{
+
+		if(correctCount < 0 || incorrectCount <0){
+			throw new ModelException("NEGATIVE_COUNTER");
+		}
+
+		int score = 0;
+		int goodScore = correctCount*10;
+		int badScore = incorrectCount*5;
+		int finalScore = score + goodScore - badScore;
+		finalScore = finalScore > 0 ? finalScore : 0;
+		return finalScore;
+		
 	}
 
 }

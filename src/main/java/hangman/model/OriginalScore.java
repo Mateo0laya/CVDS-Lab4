@@ -11,11 +11,20 @@ public class OriginalScore implements GameScore{
 	 * @pos finalScore >= 0
 	 * @return int finalScore total of points after discount wrong letters
 	 */
-	
+
 	@Override
-	public int calculateScore(int correctCount, int incorrectCount) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int calculateScore(int correctCount, int incorrectCount) throws ModelException{
+
+		if(correctCount < 0 || incorrectCount <0){
+			throw new ModelException("NEGATIVE_COUNTER");
+		}
+
+		int score = 100;
+		int badScore = incorrectCount*10;
+		int finalScore = score - badScore;
+		finalScore = finalScore > 0 ? finalScore : 0;
+		return finalScore;
+
 	}
 
 }
