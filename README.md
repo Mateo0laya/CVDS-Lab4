@@ -572,7 +572,7 @@ Unicamente actualizamos la versión de la dependencia
   mismo como las otras dependencias que se están inyectando mediante
   la fabrica.
   En la clase SwingProject modificamos el constructor:
-  ```
+ ```
   public static void main(String[] args) {
         createGUIUsingGuice().play();
     }
